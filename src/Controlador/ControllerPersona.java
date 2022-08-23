@@ -113,7 +113,8 @@ public class ControllerPersona {
         persona.setDireccion(this.vista.getjTextFieldDireccion().getText());
         modeloPersona.create(persona);
         modeloTabla.agregar(persona);
-        JOptionPane.showMessageDialog(vista, "Persona creada correctamente");
+        Resouces.success("AVISO!!!!", "PERSONA GUARDADA");
+        
     }
 
     public void editarPersona() {

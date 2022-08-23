@@ -95,7 +95,7 @@ public class ControllerUsuario {
         usuario.setIdpersona((Persona) this.vista.getjComboBoxPersonas().getSelectedItem());
         modeloUsuario.create(usuario);
         modeloTabla.agregar(usuario);
-        JOptionPane.showMessageDialog(vista, "Usuario creado correctamente");
+        Resouces.success("AVISO!!!!", "USUARIO GUARDADO");
     }
 
     public void usuarioSeleccionado() {

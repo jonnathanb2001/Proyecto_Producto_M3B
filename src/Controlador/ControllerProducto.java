@@ -95,7 +95,7 @@ public class ControllerProducto {
         producto.setCantidad(cantidad);
         modeloProducto.create(producto);
         modeloTabla.agregar(producto);
-        JOptionPane.showMessageDialog(vista, "Producto creada correctamente");
+        Resouces.success("AVISO!!!!", "PRODUCTO GUARDADO");
     }
 
     public void productoSeleccionado() {

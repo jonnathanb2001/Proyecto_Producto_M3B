@@ -18,39 +18,36 @@ import Vista.interno.fr_usuario;
  */
 public class ControllerAdministrador {
 
-    
-
     Fr_administracion vista;
     ManagerFactory manage;
-    
-    
 
     public ControllerAdministrador(Fr_administracion vista, ManagerFactory manage) {
         this.vista = vista;
         this.manage = manage;
         controleventos();
+        vista.setExtendedState(vista.MAXIMIZED_BOTH);
+
     }
 
     public void controleventos() {
         this.vista.getjMenuItemPersona().addActionListener(l -> cargarvistaPersona());
-        this.vista.getjMenuItemUsuario().addActionListener(l->cargarvistaUsuario());
-        this.vista.getjMenuItemProducto().addActionListener(l->cargarvistaProducto());
+        this.vista.getjMenuItemUsuario().addActionListener(l -> cargarvistaUsuario());
+        this.vista.getjMenuItemProducto().addActionListener(l -> cargarvistaProducto());
     }
 
     public static fr_persona vp;
-    
 
     public void cargarvistaPersona() {
         new ControllerPersona(vp, manage, new PersonaJpaController(manage.getEntityManagerFactory()), this.vista.getjDesktopPaneEscritorio());
     }
-    
+
     public static fr_usuario vu;
-    
+
     public void cargarvistaUsuario() {
         new ControllerUsuario(vu, manage, new UsuarioJpaController(manage.getEntityManagerFactory()), this.vista.getjDesktopPaneEscritorio());
     }
     public static fr_producto vpr;
-    
+
     public void cargarvistaProducto() {
         new ControllerProducto(vpr, manage, new ProductoJpaController(manage.getEntityManagerFactory()), this.vista.getjDesktopPaneEscritorio());
     }
