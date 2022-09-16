@@ -56,21 +56,21 @@ public class ControllerLogin {
         Usuario user = modelo.buscarUsuario(usuario, clave);
         
         if (user != null) {
+             Resouces.success("AVISO!!", "USUARIO CORRECTO");
             JOptionPane.showMessageDialog(vista, "Usuario Correcto " + "\n" + user.getIdpersona().toString2());
             veradmin.setVisible(true);
             new ControllerAdministrador(veradmin, manage);
             veradmin.setLocationRelativeTo(null);
         } else {
-            JOptionPane.showMessageDialog(vista, "Usuario Incorrecto");
+            Resouces.warning("ERROR!!!", "USUARIO INCORRECTO");
         }
         }catch(PersistenceException e){
-            JOptionPane.showMessageDialog(vista, "No existe conexion con la base de datos");
+             Resouces.warning("ERROR!!!", "USUARIO INCORRECTO");
         }
     }
 
     public void cerrarventana() {
         System.exit(0);
-
     }
 
     public void regresarlogin() {

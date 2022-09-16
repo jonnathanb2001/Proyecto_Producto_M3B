@@ -63,22 +63,6 @@ public class fr_persona extends javax.swing.JInternalFrame {
         this.jButtonEliminar = jButtonEliminar;
     }
 
-    public JButton getjButtonImpreso() {
-        return jButtonImpreso;
-    }
-
-    public void setjButtonImpreso(JButton jButtonImpreso) {
-        this.jButtonImpreso = jButtonImpreso;
-    }
-
-    public JButton getjButtonImprimir() {
-        return jButtonImprimir;
-    }
-
-    public void setjButtonImprimir(JButton jButtonImprimir) {
-        this.jButtonImprimir = jButtonImprimir;
-    }
-
     public JButton getjButtonLimpiarCriterio() {
         return jButtonLimpiarCriterio;
     }
@@ -167,6 +151,18 @@ public class fr_persona extends javax.swing.JInternalFrame {
         this.jTextFieldNombre = jTextFieldNombre;
     }
 
+    public JButton getjButtonReporteGeneral() {
+        return jButtonReporteGeneral;
+    }
+
+    public void setjButtonReporteGeneral(JButton jButtonReporteGeneral) {
+        this.jButtonReporteGeneral = jButtonReporteGeneral;
+    }
+
+    public JButton getjButtonReporteIndividual() {
+        return jButtonReporteIndividual;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -211,10 +207,10 @@ public class fr_persona extends javax.swing.JInternalFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButtonImprimir = new javax.swing.JButton();
+        jButtonReporteIndividual = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDatosPersonas = new javax.swing.JTable();
-        jButtonImpreso = new javax.swing.JButton();
+        jButtonReporteGeneral = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -406,10 +402,10 @@ public class fr_persona extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Lista de Personas");
 
-        jButtonImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/icon-printer.png"))); // NOI18N
-        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+        jButtonReporteIndividual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/icon-printer.png"))); // NOI18N
+        jButtonReporteIndividual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImprimirActionPerformed(evt);
+                jButtonReporteIndividualActionPerformed(evt);
             }
         });
 
@@ -423,7 +419,7 @@ public class fr_persona extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTableDatosPersonas);
 
-        jButtonImpreso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/printed.png"))); // NOI18N
+        jButtonReporteGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/printed.png"))); // NOI18N
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/cross.gif"))); // NOI18N
         jButtonCancelar.setText("Cancelar");
@@ -443,9 +439,9 @@ public class fr_persona extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonReporteIndividual, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)
-                                .addComponent(jButtonImpreso, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonReporteGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60)
                                 .addComponent(jButtonCancelar)))
                         .addGap(33, 33, 33))))
@@ -464,8 +460,8 @@ public class fr_persona extends javax.swing.JInternalFrame {
                             .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(jButtonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jButtonImpreso, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonReporteIndividual, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jButtonReporteGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -498,9 +494,9 @@ public class fr_persona extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+    private void jButtonReporteIndividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReporteIndividualActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonImprimirActionPerformed
+    }//GEN-LAST:event_jButtonReporteIndividualActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -509,10 +505,10 @@ public class fr_persona extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonCrear;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonEliminar;
-    private javax.swing.JButton jButtonImpreso;
-    private javax.swing.JButton jButtonImprimir;
     private javax.swing.JButton jButtonLimpiarCriterio;
     private javax.swing.JButton jButtonLimpiarDatos;
+    private javax.swing.JButton jButtonReporteGeneral;
+    private javax.swing.JButton jButtonReporteIndividual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -546,4 +542,5 @@ public class fr_persona extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
+
 }

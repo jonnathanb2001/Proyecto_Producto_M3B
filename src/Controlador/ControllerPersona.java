@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 import Proyecto_pv.*;
 import Modelo.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -67,9 +69,11 @@ public class ControllerPersona {
         //busqueda
         this.vista.getjButtonBuscarCriterio().addActionListener(l -> buscarpersona());
         this.vista.getjRadioButtonMostrarTodo().addActionListener(l -> buscarpersona());
-        
+
         this.vista.getjButtonLimpiarCriterio().addActionListener(l -> limpiarbuscador());
-        
+        this.vista.getjButtonReporteGeneral().addActionListener(l -> reporteGeneral());
+        this.vista.getjButtonReporteIndividual().addActionListener(l->reporteIndividual());
+
         this.vista.getjTableDatosPersonas().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listaModeloPersona = this.vista.getjTableDatosPersonas().getSelectionModel();
         listaModeloPersona.addListSelectionListener(new ListSelectionListener() {
@@ -83,7 +87,6 @@ public class ControllerPersona {
         });
         this.vista.getjButtonEditar().setEnabled(false);
         this.vista.getjButtonEliminar().setEnabled(false);
-        
 
     }
 
@@ -104,17 +107,20 @@ public class ControllerPersona {
     }
 
     public void guardarPersona() {
-        persona = new Persona();
-        persona.setNombre(this.vista.getjTextFieldNombre().getText());
-        persona.setApellido(this.vista.getjTextFieldApellido().getText());
-        persona.setCedula(this.vista.getjTextFieldCedula().getText());
-        persona.setCelular(this.vista.getjTextFieldCelular().getText());
-        persona.setCorreo(this.vista.getjTextFieldCorreo().getText());
-        persona.setDireccion(this.vista.getjTextFieldDireccion().getText());
-        modeloPersona.create(persona);
-        modeloTabla.agregar(persona);
-        Resouces.success("AVISO!!!!", "PERSONA GUARDADA");
-        
+
+        if (validacionesPersona() == false) {
+        } else {
+            persona = new Persona();
+            persona.setNombre(this.vista.getjTextFieldNombre().getText());
+            persona.setApellido(this.vista.getjTextFieldApellido().getText());
+            persona.setCedula(this.vista.getjTextFieldCedula().getText());
+            persona.setCelular(this.vista.getjTextFieldCelular().getText());
+            persona.setCorreo(this.vista.getjTextFieldCorreo().getText());
+            persona.setDireccion(this.vista.getjTextFieldDireccion().getText());
+            modeloPersona.create(persona);
+            modeloTabla.agregar(persona);
+            Resouces.success("AVISO!!!", "PERSONA GUARDADA CORRECTAMENTEQ");
+        }
     }
 
     public void editarPersona() {
@@ -130,7 +136,7 @@ public class ControllerPersona {
             } catch (Exception e) {
                 Logger.getLogger(ControllerPersona.class.getName()).log(Level.SEVERE, null, e);
             }
-            JOptionPane.showMessageDialog(vista, "Persona editada correctamente");
+            Resouces.success("AVISO!!!", "PERSONA EDITADA CORRECTAMENTE");
             limpiar();
         }
     }
@@ -144,7 +150,7 @@ public class ControllerPersona {
             }
             modeloTabla.eliminar(persona);
             modeloTabla.actualizar(persona);
-            JOptionPane.showMessageDialog(vista, "Persona eliminada correctamente");
+            Resouces.success("AVISO!!!", "PERSONA ELIMINADA CORRECTAMENTE");
         }
     }
 
@@ -182,6 +188,85 @@ public class ControllerPersona {
         this.vista.getjTextFieldBuscarCriterio().setText("");
         modeloTabla.setFilas(modeloPersona.findPersonaEntities());
         modeloTabla.fireTableDataChanged();
+    }
+
+    //llamar
+    public void reporteGeneral() {
+        Resouces.imprimirReeporte(ManagerFactory.getConnection(manage.getEntityManagerFactory().createEntityManager()), "/reportes/Persona.jasper", new HashMap());
+    }
+    
+    public void reporteIndividual(){
+        if(persona != null){
+            Map parameters = new HashMap();
+            parameters.put("id",persona.getIdpersona());
+            
+            Resouces.imprimirReeporte(ManagerFactory.getConnection(manage.getEntityManagerFactory().createEntityManager()), "/reportes/IndividualPersona.jasper", parameters);
+        }else{
+            Resouces.warning("ATENCIÓN!!!", "PERSONA NO SELECCIONADA");
+        }
+    }
+
+    public boolean validacionesPersona() {
+        Validaciones validar = new Validaciones();
+        boolean validado = false;
+        if (!this.vista.getjTextFieldNombre().getText().isEmpty()) {
+            if (validar.ValidarTextoConEspacio(this.vista.getjTextFieldNombre().getText())) {
+
+                if (!this.vista.getjTextFieldApellido().getText().isEmpty()) {
+                    if (validar.ValidarTextoConEspacio(this.vista.getjTextFieldApellido().getText())) {
+
+                        //segunda  valid
+                        if (!this.vista.getjTextFieldCedula().getText().isEmpty()) {
+                            if (validar.validarCedula(this.vista.getjTextFieldCedula().getText())) {
+
+                                //Segunda valid
+                                if (!this.vista.getjTextFieldCelular().getText().isEmpty()) {
+                                    if (validar.validarCelu(this.vista.getjTextFieldCelular().getText())) {
+
+                                        //Segunda valid
+                                        if (!this.vista.getjTextFieldCorreo().getText().isEmpty()) {
+                                            if (validar.validarEmail(this.vista.getjTextFieldCorreo().getText())) {
+
+                                                //Segunda valid
+                                                if (!this.vista.getjTextFieldDireccion().getText().isEmpty()) {
+                                                    if (validar.validarDirec(this.vista.getjTextFieldDireccion().getText())) {
+                                                        //Segunda valid
+                                                        validado = true;
+                                                    } else {
+                                                        Resouces.warning("AVISO!!!", "CEDULA INCORRECTA");
+                                                    }
+                                                } else {
+                                                    Resouces.warning("AVISO!!!", "CAMPO DE DIRECCIÓN VACIA");
+                                                }
+                                            } else {
+                                                Resouces.warning("AVISO!!!", "CORREO INCORRECTO");
+                                            }
+                                        } else {
+                                            Resouces.warning("AVISO!!!", "CAMPO DE CORREO VACIO");
+                                        }
+                                    } else {
+                                        Resouces.warning("AVISO!!!", "CELULAR INCORRECTO");
+                                    }
+                                } else {
+                                    Resouces.warning("AVISO!!!", "CAMPO DE CELULAR VACIA");
+                                }
+                            } else {
+                                Resouces.warning("AVISO!!!", "CEDULA INCORRECTA");
+                            }
+                        } else {
+                            Resouces.warning("AVISO!!!", "CAMPO DE CEDULA VACIO");
+                        }
+                    } else {
+                        Resouces.warning("AVISO!!!", "CAMPO DE APELLIDO VACIO");
+                    }
+                }
+            } else {
+                Resouces.warning("AVISO!!!", "NOMBRE INCORRECTO");
+            }
+        } else {
+            Resouces.warning("AVISO!!!", "CAMPO DE NOMBRE VACIO");
+        }
+        return validado;
     }
 
 }

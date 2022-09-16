@@ -10,6 +10,8 @@ import Modelo.PersonaJpaController;
 import Proyecto_pv.ManagerFactory;
 import Vista.interno.fr_usuario;
 import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,6 +74,8 @@ public class ControllerUsuario {
         this.vista.getjRadioButtonMostrarTodo().addActionListener(l -> buscarusuario());
 
         this.vista.getjButtonLimpiarCriterio().addActionListener(l -> limpiarbuscador());
+        this.vista.getjButtonReporteGeneral().addActionListener(l->reporteGeneral());
+        this.vista.getjButtonReporteIndividual().addActionListener(l->reporteIndividual());
 
         this.vista.getjTableDatosUsuario().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listaModeloPersona = this.vista.getjTableDatosUsuario().getSelectionModel();
@@ -89,13 +93,16 @@ public class ControllerUsuario {
     }
 
     public void guardarUsuario() {
-        usuario = new Usuario();
-        usuario.setUsuario(this.vista.getjTextFieldNombre().getText());
-        usuario.setClave(this.vista.getjPasswordFieldClave().getText());
-        usuario.setIdpersona((Persona) this.vista.getjComboBoxPersonas().getSelectedItem());
-        modeloUsuario.create(usuario);
-        modeloTabla.agregar(usuario);
-        Resouces.success("AVISO!!!!", "USUARIO GUARDADO");
+        if (validacionesUsuario() == false) {
+        } else {
+            usuario = new Usuario();
+            usuario.setUsuario(this.vista.getjTextFieldNombre().getText());
+            usuario.setClave(this.vista.getjPasswordFieldClave().getText());
+            usuario.setIdpersona((Persona) this.vista.getjComboBoxPersonas().getSelectedItem());
+            modeloUsuario.create(usuario);
+            modeloTabla.agregar(usuario);
+            Resouces.success("AVISO!!!!", "USUARIO GUARDADO CORRECTAMENTE");
+        }
     }
 
     public void usuarioSeleccionado() {
@@ -122,7 +129,7 @@ public class ControllerUsuario {
             } catch (Exception e) {
                 Logger.getLogger(ControllerPersona.class.getName()).log(Level.SEVERE, null, e);
             }
-            JOptionPane.showMessageDialog(vista, "Usuario editado correctamente");
+            Resouces.success("AVISO!!!", "USUARIO EDITADO CORRECTAMENTE");
             limpiar();
         }
     }
@@ -136,7 +143,7 @@ public class ControllerUsuario {
             }
             modeloTabla.eliminar(usuario);
             modeloTabla.actualizar(usuario);
-            JOptionPane.showMessageDialog(vista, "Usuario eliminado correctamente");
+            Resouces.success("AVISO!!!", "USUARIO ELIMINADO CORRECTAMENTE");
         }
     }
 
@@ -176,6 +183,44 @@ public class ControllerUsuario {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Capturando errores cargando combobox");
         }
+    }
+    //llamar
+
+    public void reporteGeneral() {
+        Resouces.imprimirReeporte(ManagerFactory.getConnection(manage.getEntityManagerFactory().createEntityManager()), "/reportes/Usuario.jasper",new HashMap());
+    }
+    public void reporteIndividual(){
+        if(usuario != null){
+            Map parameters = new HashMap();
+            parameters.put("id",usuario.getIdusario());
+            
+            Resouces.imprimirReeporte(ManagerFactory.getConnection(manage.getEntityManagerFactory().createEntityManager()), "/reportes/IndividualUsuario.jasper", parameters);
+        }else{
+            Resouces.warning("ATENCIÓN!!!", "PRODUCTO NO SELECCIONADA");
+        }
+    }
+
+    public boolean validacionesUsuario() {
+        Validaciones validar = new Validaciones();
+        boolean validado = false;
+        if (!this.vista.getjTextFieldNombre().getText().isEmpty()) {
+            if (validar.ValidarTextoConEspacio(this.vista.getjTextFieldNombre().getText())) {
+
+                if (!this.vista.getjPasswordFieldClave().getText().isEmpty()) {
+
+                    validado = true;
+
+                } else {
+                    Resouces.warning("AVISO!!!", "CONTRASEÑA VACIA");
+                }
+            } else {
+                Resouces.warning("AVISO!!!", "USUARIO INCORRECTO");
+            }
+        } else {
+            Resouces.warning("AVISO!!!", "USUARIO VACIO");
+        }
+
+        return validado;
     }
 
 }

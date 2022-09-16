@@ -123,7 +123,21 @@ public class fr_producto extends javax.swing.JInternalFrame {
         this.jTextFieldPrecio = jTextFieldPrecio;
     }
 
-    
+    public JButton getjButtonReporteGeneral() {
+        return jButtonReporteGeneral;
+    }
+
+    public void setjButtonReporteGeneral(JButton jButtonReporteGeneral) {
+        this.jButtonReporteGeneral = jButtonReporteGeneral;
+    }
+
+    public JButton getjButtonReporteIndividual() {
+        return jButtonReporteIndividual;
+    }
+
+    public void setjButtonReporteIndividual(JButton jButtonReporteIndividual) {
+        this.jButtonReporteIndividual = jButtonReporteIndividual;
+    }
 
     
     /**
@@ -161,10 +175,10 @@ public class fr_producto extends javax.swing.JInternalFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButtonReporteIndividual = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDatosProducto = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
+        jButtonReporteGeneral = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -322,10 +336,10 @@ public class fr_producto extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Lista de Productos");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/icon-printer.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonReporteIndividual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/icon-printer.png"))); // NOI18N
+        jButtonReporteIndividual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonReporteIndividualActionPerformed(evt);
             }
         });
 
@@ -339,7 +353,7 @@ public class fr_producto extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTableDatosProducto);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/printed.png"))); // NOI18N
+        jButtonReporteGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/printed.png"))); // NOI18N
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Imagenes/cross.gif"))); // NOI18N
         jButtonCancelar.setText("Cancelar");
@@ -359,9 +373,9 @@ public class fr_producto extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonReporteIndividual, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonReporteGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60)
                                 .addComponent(jButtonCancelar)))
                         .addGap(33, 33, 33))))
@@ -380,8 +394,8 @@ public class fr_producto extends javax.swing.JInternalFrame {
                             .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonReporteIndividual, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jButtonReporteGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -417,14 +431,12 @@ public class fr_producto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonReporteIndividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReporteIndividualActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonReporteIndividualActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonBuscarCriterio;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonCrear;
@@ -432,6 +444,8 @@ public class fr_producto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonLimpiarCriterio;
     private javax.swing.JButton jButtonLimpiarDatos;
+    private javax.swing.JButton jButtonReporteGeneral;
+    private javax.swing.JButton jButtonReporteIndividual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;

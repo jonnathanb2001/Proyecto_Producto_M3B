@@ -577,9 +577,9 @@
                                   <Component id="jScrollPane2" pref="613" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jButtonImprimir" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="jButtonReporteIndividual" min="-2" pref="40" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                      <Component id="jButtonImpreso" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="jButtonReporteGeneral" min="-2" pref="37" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                                       <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -604,11 +604,11 @@
                                   <Component id="jButtonCancelar" min="-2" pref="33" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                      <Component id="jButtonImprimir" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="jButtonReporteIndividual" min="-2" pref="31" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jButtonImpreso" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="jButtonReporteGeneral" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -624,14 +624,14 @@
                 <Property name="text" type="java.lang.String" value="Lista de Personas"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonImprimir">
+            <Component class="javax.swing.JButton" name="jButtonReporteIndividual">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Vista/Imagenes/icon-printer.png"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonImprimirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReporteIndividualActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -657,7 +657,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButtonImpreso">
+            <Component class="javax.swing.JButton" name="jButtonReporteGeneral">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Vista/Imagenes/printed.png"/>

@@ -9,10 +9,11 @@ import Modelo.*;
 import Proyecto_pv.ManagerFactory;
 import Vista.interno.*;
 import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -69,6 +70,8 @@ public class ControllerProducto {
         this.vista.getjRadioButtonMostrarTodo().addActionListener(l -> buscarproducto());
 
         this.vista.getjButtonLimpiarCriterio().addActionListener(l -> limpiarbuscador());
+        this.vista.getjButtonReporteGeneral().addActionListener(l -> reporteGeneral());
+        this.vista.getjButtonReporteIndividual().addActionListener(l->reporteIndividual());
 
         this.vista.getjTableDatosProducto().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listaModeloPersona = this.vista.getjTableDatosProducto().getSelectionModel();
@@ -87,15 +90,18 @@ public class ControllerProducto {
     }
 
     public void guardarProducto() {
-        producto = new Producto();
-        producto.setNombre(this.vista.getjTextFieldNombre().getText());
-        double precio = Double.parseDouble(this.vista.getjTextFieldPrecio().getText());
-        producto.setPrecio(precio);
-        int cantidad = Integer.parseInt(this.vista.getjTextFieldCantidad().getText());
-        producto.setCantidad(cantidad);
-        modeloProducto.create(producto);
-        modeloTabla.agregar(producto);
-        Resouces.success("AVISO!!!!", "PRODUCTO GUARDADO");
+        if (validacionesProducto() == false) {
+        } else {
+            producto = new Producto();
+            producto.setNombre(this.vista.getjTextFieldNombre().getText());
+            double precio = Double.parseDouble(this.vista.getjTextFieldPrecio().getText());
+            producto.setPrecio(precio);
+            int cantidad = Integer.parseInt(this.vista.getjTextFieldCantidad().getText());
+            producto.setCantidad(cantidad);
+            modeloProducto.create(producto);
+            modeloTabla.agregar(producto);
+            Resouces.success("AVISO!!!", "PRODUCTO GUARDADO CORRECTAMENTE");
+        }
     }
 
     public void productoSeleccionado() {
@@ -126,7 +132,8 @@ public class ControllerProducto {
             } catch (Exception e) {
                 Logger.getLogger(ControllerPersona.class.getName()).log(Level.SEVERE, null, e);
             }
-            JOptionPane.showMessageDialog(vista, "Producto editada correctamente");
+            Resouces.success("AVISO!!!", "PRODUCTO EDITADO CORRECTAMENTE");
+
             limpiar();
         }
     }
@@ -140,7 +147,7 @@ public class ControllerProducto {
             }
             modeloTabla.eliminar(producto);
             modeloTabla.actualizar(producto);
-            JOptionPane.showMessageDialog(vista, "Producto eliminada correctamente");
+            Resouces.success("AVISO!!!", "PRODUCTO ELIMINADO CORRECTAMENTE");
         }
     }
 
@@ -170,5 +177,60 @@ public class ControllerProducto {
         this.vista.getjTextFieldPrecio().setText("");
         this.vista.getjTextFieldCantidad().setText("");
 
+    }
+    //llamar
+
+    public void reporteGeneral() {
+        Resouces.imprimirReeporte(ManagerFactory.getConnection(manage.getEntityManagerFactory().createEntityManager()), "/reportes/Producto.jasper",new HashMap());
+    }
+    
+    public void reporteIndividual(){
+        if(producto != null){
+            Map parameters = new HashMap();
+            parameters.put("id",producto.getIdproducto());
+            
+            Resouces.imprimirReeporte(ManagerFactory.getConnection(manage.getEntityManagerFactory().createEntityManager()), "/reportes/IndividualProducto.jasper", parameters);
+        }else{
+            Resouces.warning("ATENCIÓN!!!", "PRODUCTO NO SELECCIONADA");
+        }
+    }
+
+    public boolean validacionesProducto() {
+        Validaciones validar = new Validaciones();
+        boolean validado = false;
+        if (!this.vista.getjTextFieldNombre().getText().isEmpty()) {
+            if (validar.ValidarTextoConEspacio(this.vista.getjTextFieldNombre().getText())) {
+
+                if (!this.vista.getjTextFieldPrecio().getText().isEmpty()) {
+                    if (validar.validarNumeros(this.vista.getjTextFieldPrecio().getText())) {
+
+                        //segunda  valid
+                        if (!this.vista.getjTextFieldCantidad().getText().isEmpty()) {
+                            if (validar.validarNumeros(this.vista.getjTextFieldCantidad().getText())) {
+
+                                validado = true;
+
+                            } else {
+                                Resouces.warning("AVISO!!!", "CANTIDAD INCORRECTO");
+                            }
+                        } else {
+                            Resouces.warning("AVISO!!!", "CANTIDAD VACIO");
+                        }
+                    } else {
+                        Resouces.warning("AVISO!!!", "PRECIO INCORRECTO");
+                    }
+                } else {
+                    Resouces.warning("AVISO!!!", "PRECIO VACIO");
+                }
+
+            } else {
+                Resouces.warning("AVISO!!!", "NOMBRE INCORRECTO");
+
+            }
+        } else {
+            Resouces.warning("AVISO!!!", "NOMBRE VACIO");
+
+        }
+        return validado;
     }
 }
