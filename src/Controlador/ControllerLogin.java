@@ -15,6 +15,8 @@ import Vista.interno.fr_usuario;
 import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 
+
+
 /**
  *
  * @author HP

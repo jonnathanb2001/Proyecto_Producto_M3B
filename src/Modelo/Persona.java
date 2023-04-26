@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ * 
  *
  * @author HP
  */
@@ -162,7 +163,6 @@ public class Persona implements Serializable {
         return nombre + " " + apellido;
 
     }
-
     public String toString2() {
         return "Cedula: " + cedula + "\n"
                 + "Nombre: " + nombre + "\n"
